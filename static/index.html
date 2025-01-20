@@ -1,0 +1,172 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>         
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Smart Farming Dashboard</title>
+        <link rel="stylesheet" href="/static/styles.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="container">     <!-- container for all the items in the html -->
+
+            <header>
+                <h1> Smart Farming Dashboard</h1>
+            </header>
+            
+            <div class="dashboard">         <!-- dashboard, conntainer for all the items except the header -->
+
+                <div class="section">       <!-- section container for current environment -->
+                    <h2><i class="fa-solid fa-tree"></i> Current Environment</h2>
+                    <div class="content">
+                        <p><strong><i class="fas fa-thermometer-half"></i> Temperature:</strong> <span id="temperature">--°C</span></p>
+                        <p><strong><i class="fa-solid fa-droplet"></i> Humidity:</strong> <span id="humidity">--%</span></p>
+                        <p><strong><i class="fa-solid fa-droplet"></i> Moisture:</strong> <span id="humidity">--%</span></p>
+                        <button id="update-environment-btn">Update Environment</button>
+                    </div>
+                </div>
+                
+                <div class="section weather-widget">        <!-- section container for weather forecast -->
+                    <h2><i class="fas fa-cloud-sun"></i> Weather Forecast</h2>
+                    <a class="weatherwidget-io" href="https://forecast7.com/en/27d6685d32/patan/" data-label_1="LALITPUR" data-label_2="Nepal" data-font="Ubuntu" data-icons="Climacons Animated" data-mode="Forecast" data-days="5" data-theme="pure" >LALITPUR Nepal</a>
+                    <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                    </script>
+                </div>
+                
+                <div class="section" id="greenhouse-controls">
+                    <h2><i class="fa-solid fa-tools"></i> Farm Controls</h2>
+                    <div class="control-switches">
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="pump-switch" onchange="toggleDevice('PUMP', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-pump-soap"></i> Pump</span>
+                        </div>
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="heater-switch" onchange="toggleDevice('HEATER', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-temperature-high"></i> Heater</span>
+                        </div>
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="vent-switch" onchange="toggleDevice('VENT', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-wind"> </i>Vent</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-switches">
+                        <div class="control-item">
+                            <button id="fertilizer-n-button">
+                                <i class="fas fa-leaf"></i> Nitrogen (N)
+                            </button>
+                        </div>
+                        <div class="control-item">
+                            <button id="fertilizer-p-button">
+                                <i class="fas fa-leaf"></i> Phosphorus (P)
+                            </button>
+                        </div>
+                        <div class="control-item">
+                            <button id="fertilizer-k-button">
+                                <i class="fas fa-leaf"></i> Potassium (K)
+                            </button>
+                        </div>
+                    </div>                
+                    
+                    
+                    <div class="camera-angle-control">      <!-- Camera Angle Control with Radio Buttons -->
+                        <label for="camera-angle-mode"><h3>Camera Angle Mode</h3></label>
+                        <div class="camera-angle-mode">
+                            <input type="radio" id="auto-mode" name="camera-angle-mode" value="automatic" checked onclick="toggleCameraAngleSlider('auto')">
+                            <label for="auto-mode">Automatic</label>
+                            <input type="radio" id="manual-mode" name="camera-angle-mode" value="manual" onclick="toggleCameraAngleSlider('manual')">
+                            <label for="manual-mode">Manual</label>
+                        </div>
+                        
+                        <div id="camera-angle-slider-container" style="display: none; margin-top: 25px;">
+                            <label for="camera-angle-slider">
+                                <span class="label-text"><i class="fas fa-camera"></i> Camera Angle</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="camera-angle-slider" 
+                                min="0" 
+                                max="180" 
+                                value="90" 
+                                step="1" 
+                                oninput="adjustCameraAngle(this.value)" 
+                            >
+                            <span id="camera-angle-display">90°</span> <!-- Display for current angle -->
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div id="device-status" style="display: none; margin-top: 20px;">           <!-- Container for device's present status. Is invisible at first, only visible after toggles-->
+                    <h2><i class="fa-solid fa-plug"></i> Device status:</h2>
+                    <ul id="device-status-list"></ul>
+                </div>
+                
+                <div id="device-history" style="display: none; margin-top: 20px;">          <!-- Container for device control history. Invisible at first, visible after toggle. -->
+                    <h2><i class="fa-solid fa-clock"></i> Farm Control History</h2>
+                    <ol id="device-history-list"></ol>
+                </div>
+
+                <div class="section" id="current-crops">            <!-- Container for current crops section -->
+                    <h2><i class="fas fa-leaf"></i> Current Crops</h2>
+                    <ul id="crops-list">
+                        <!-- Crop list to be added here -->
+                    </ul>
+                </div>
+
+                <div class="section" id="add-crop">     <!-- section container for adding crops section-->
+                    <h2><i class="fa-solid fa-seedling"></i> Add a New Crop</h2>
+                    <form id="add-crop-form">
+                        <input type="text" id="crop-name" placeholder="Crop Name" required>
+                        <input type="date" id="planting-date" placeholder="Planting Date" required>
+                        <input type="number" id="harvest-duration" placeholder="Harvest Duration (days)" required>
+                        <button type="submit">Add Crop</button>
+                    </form>
+                </div>
+
+                <div class="section" id="best-price-suggestor">         <!-- section container for best price predictor.-->
+                    <h2><i class="fa-solid fa-indian-rupee-sign"></i> Best Price Suggestor</h2>
+                    <div class="search-container">
+                        <input type="text" id="commodity-search" placeholder="Enter commodity name">
+                        <button id="search-btn">Predict Price</button>
+                    </div>
+                    <div id="price-prediction" class="price-prediction" style="display:none;">
+                        <h3 id="price-prediction-title">Predicted Price for Next 3 Days:</h3>
+                        <ul id="price-list">
+                            <!-- Predictions will appear here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="plant-disease-recognition">
+                <h2><i class="fa-solid fa-virus"></i> Plant Disease Recognition</h2>
+                <div class="content">
+                    <p>Upload an image of a plant leaf to recognize the disease.</p>
+                    <input type="file" id="disease-image-upload" accept="image/*">
+                    <button id="predict-disease-btn" onclick="predictDisease()">Predict Disease</button>
+                </div>
+                <div class="result-container" style="display: none;">
+                    <p><span id="disease-name"></span></p>
+                    <p id="disease-confidence"></p>
+                    <p id="disease-measures"></p>
+                </div>
+            </div>
+        
+        </div>
+        
+        <script src="/static/script.js"></script>
+    </body>
+    </html>

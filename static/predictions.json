@@ -1,0 +1,17 @@
+{
+    "diseases": [
+      {
+        "disease": "Healthy",
+        "measures": "Regularly monitor the plants for any changes.\nEnsure proper irrigation and fertilization.\nMaintain proper spacing between plants for air circulation.\nRemove any weeds around the plants to reduce competition."
+      },
+      {
+        "disease": "Late Blight",
+        "measures": "Apply fungicides containing metalaxyl or mefenoxam.\nRemove and destroy infected plants and debris.\nAvoid overhead irrigation to reduce moisture on leaves.\nRotate crops to prevent reinfection in the following season."
+      },
+      {
+        "disease": "Early Blight",
+        "measures": "Apply fungicides with active ingredients like chlorothalonil or mancozeb.\nRemove infected leaves and debris from the soil.\nAvoid planting potatoes in the same location for consecutive years.\nEnsure proper soil drainage to prevent excessive moisture."
+      }
+    ]
+  }
+  
