@@ -32,7 +32,7 @@ jobs:
         push: true
         # Fix: Corrected the tag format by removing the redundant "bin1o1/bin1o1" part in the image tag.
         # It should match your actual DockerHub repository format.
-        tags: ${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/bin1o1/smart-farming:${{ github.sha }}
+        tags: ${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/smart-farming:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,8 +47,8 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'smartfarmingtest'
+        app-name: 'smarterfarming'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_342b22772f8048bab4d1ada8d4b97894 }}
         # Fix: Corrected the image tag to match the tag format used in the "Build and push container image" step.
-        images: '${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/bin1o1/smart-farming:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/smart-farming:${{ github.sha }}'
