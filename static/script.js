@@ -24,7 +24,7 @@ async function searchCommodityPrice() {         //function to predict price. asy
         
         console.log('Fetching data for:', commodity);
 
-        const response = await fetch(`https://smart-farming-dashboard.azurewebsites.net/predict/${encodeURIComponent(commodity)}`);         //waits for the response from the server. await keyword pauses function execution until a response is received
+        const response = await fetch(`https://smarterfarming.azurewebsites.net/predict/${encodeURIComponent(commodity)}`);         //waits for the response from the server. await keyword pauses function execution until a response is received
         
         console.log('Response status:', response.status);
 
@@ -59,7 +59,7 @@ document.getElementById('search-btn').addEventListener('click', searchCommodityP
 document.addEventListener("DOMContentLoaded", function () {     //code inside this eventlistener only runs after the whole HTML document has been loaded.
     
     async function loadCrops() {        //async function to load crops
-        const response = await fetch('https://smart-farming-dashboard.azurewebsites.net/get_crops/');       //fetches the crops planted from the server
+        const response = await fetch('https://smarterfarming.azurewebsites.net/get_crops/');       //fetches the crops planted from the server
         const data = await response.json();
         const cropsList = document.getElementById("crops-list");
         cropsList.innerHTML = ""; // Clear the list before adding new crops
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {     //code inside th
         const harvestDuration = document.getElementById("harvest-duration").value;      //harvestduration entered
 
         // Send POST request to the server to add the new crop
-        const response = await fetch('https://smart-farming-dashboard.azurewebsites.net/add_crop/', {
+        const response = await fetch('https://smarterfarming.azurewebsites.net/add_crop/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'      //tells the server that the body is in JSON
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {     //code inside th
 });
 
 
-let ws = new WebSocket("wss://smart-farming-dashboard.azurewebsites.net/ws");       //establishes a websocket connection to the server
+let ws = new WebSocket("wss://smarterfarming.azurewebsites.net/ws");       //establishes a websocket connection to the server
 
 ws.onmessage = function(event) {
     console.log("ESP32 says: " + event.data);       //logging recieved messages from the websocket server
@@ -293,7 +293,7 @@ async function predictDisease() {
 
     try {
         // Send the image to the API
-        const response = await fetch("https://smartfarmingtest.azurewebsites.net/predict", {
+        const response = await fetch("https://smarterfarming.azurewebsites.net/predict", {
             method: "POST",
             body: formData
         });
