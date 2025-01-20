@@ -19,20 +19,18 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Log in to Docker Hub (corrected login step)
+    - name: Log in to registry
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_6aca28808e6340d99650dee1d3c2600e }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_5d70671990e6495aa31688bc83fa12a6 }}
 
-    - name: Build and push container image to Docker Hub
+    - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        # Fix: Corrected the tag format by removing the redundant "bin1o1/bin1o1" part in the image tag.
-        # It should match your actual DockerHub repository format.
-        tags: ${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/smart-farming:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/bin1o1/smart-farming:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -49,6 +47,5 @@ jobs:
       with:
         app-name: 'smarterfarming'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_342b22772f8048bab4d1ada8d4b97894 }}
-        # Fix: Corrected the image tag to match the tag format used in the "Build and push container image" step.
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d68656f514ef4a0fb7c2fc83b4d26e5c }}/smart-farming:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d155455e4c914603a331216727b8f293 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/bin1o1/smart-farming:${{ github.sha }}'
