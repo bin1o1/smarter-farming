@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/bin1o1/smart-farming:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/smart-farming:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'smarterfarming'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_d155455e4c914603a331216727b8f293 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/bin1o1/smart-farming:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1156c9603f4f4fc2867d8c5e55b814d4 }}/smart-farming:${{ github.sha }}'
