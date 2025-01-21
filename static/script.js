@@ -1,6 +1,7 @@
 function updateEnvironment() {          //update environment function 
     document.getElementById('temperature').textContent = `28°C`;
     document.getElementById('humidity').textContent = `65%`;
+    document.getElementById('moisture').textContent = `10%`;
 }
 
 async function searchCommodityPrice() {         //function to predict price. asynchronous to prevent lagging in the website. Rest of the code still runs while this executes.
@@ -257,8 +258,17 @@ function toggleCameraAngleSlider(mode) {
     // If 'manual' mode is selected, show the slider
     if (mode === 'manual') {
         sliderContainer.style.display = 'block';
+        console.log("Camera set to manual mode");
+        if(ws && ws.readyState === WebSocket.OPEN){
+            ws.send('CAMERA_MANUAL');
+        }
     } else {
         sliderContainer.style.display = 'none';  // Hide slider in 'automatic' mode
+        console.log('Camera set to Automatic mode')
+
+        if(ws && ws.readyState === WebSocket.OPEN){
+            ws.send('CAMERA_AUTO');
+        }
     }
 }
 
@@ -315,3 +325,15 @@ async function predictDisease() {
         alert("Error occurred while predicting disease.");
     }
 };
+
+
+function adjustVentAngle(angle) {
+    const display = document.getElementById('vent-angle-display'); // Update the displayed value
+    display.textContent = `${angle}°`;
+
+    console.log(`Vent angle adjusted to: ${angle}°`);
+
+    if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(`VENT_ANGLE:${angle}`);
+    }
+}

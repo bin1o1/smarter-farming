@@ -123,7 +123,7 @@ button {
     margin-top: 15px;
     padding: 12px 20px;
     font-size: 1em;
-    background-color: #007bff;
+    background-color: #16C47F;
     color: white;
     border: none;
     border-radius: 5px;
@@ -341,7 +341,7 @@ input:checked + .slider:before {
 }
 
 #add-crop-form button {
-    background-color: #007bff;
+    background-color: #16C47F;
 }
 
 #add-crop-form button:hover {
@@ -552,6 +552,32 @@ input:focus {
     width: 100%;
 }
 
-.disease-recognition-title{
-    margin-bottom: 0px;
+#disease-recognition-title{
+    margin-bottom: -18px;
+}
+
+.vent-control {
+    text-align: center;
+}
+
+#vent-angle-control-title {
+    font-size: 1.5rem; /* Adjust size as needed */
+    margin-bottom: 10px;
+}
+
+#vent-angle-slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+}
+
+#vent-angle-slider {
+    width: 80%; /* Adjust width as needed */
+    margin: 10px 0;
+}
+
+#vent-angle-display {
+    margin-top: 5px;
+    font-weight: bold;
 }

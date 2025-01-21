@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/static/styles.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     </head>
     <body>
         <div class="container">     <!-- container for all the items in the html -->
@@ -23,7 +23,7 @@
                     <div class="content">
                         <p><strong><i class="fas fa-thermometer-half"></i> Temperature:</strong> <span id="temperature">--°C</span></p>
                         <p><strong><i class="fa-solid fa-droplet"></i> Humidity:</strong> <span id="humidity">--%</span></p>
-                        <p><strong><i class="fa-solid fa-droplet"></i> Moisture:</strong> <span id="humidity">--%</span></p>
+                        <p><strong><i class="fa-solid fa-droplet"></i> Moisture:</strong> <span id="moisture">--%</span></p>
                         <button id="update-environment-btn">Update Environment</button>
                     </div>
                 </div>
@@ -38,30 +38,7 @@
                 
                 <div class="section" id="greenhouse-controls">
                     <h2><i class="fa-solid fa-tools"></i> Farm Controls</h2>
-                    <div class="control-switches">
-                        <div class="control-item">
-                            <label class="switch">
-                                <input type="checkbox" id="pump-switch" onchange="toggleDevice('PUMP', this)">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="label-text"><i class="fas fa-pump-soap"></i> Pump</span>
-                        </div>
-                        <div class="control-item">
-                            <label class="switch">
-                                <input type="checkbox" id="heater-switch" onchange="toggleDevice('HEATER', this)">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="label-text"><i class="fas fa-temperature-high"></i> Heater</span>
-                        </div>
-                        <div class="control-item">
-                            <label class="switch">
-                                <input type="checkbox" id="vent-switch" onchange="toggleDevice('VENT', this)">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="label-text"><i class="fas fa-wind"> </i>Vent</span>
-                        </div>
-                    </div>
-                    
+
                     <div class="control-switches">
                         <div class="control-item">
                             <button id="fertilizer-n-button">
@@ -78,34 +55,84 @@
                                 <i class="fas fa-leaf"></i> Potassium (K)
                             </button>
                         </div>
-                    </div>                
-                    
-                    
-                    <div class="camera-angle-control">      <!-- Camera Angle Control with Radio Buttons -->
-                        <label for="camera-angle-mode"><h3>Camera Angle Mode</h3></label>
-                        <div class="camera-angle-mode">
-                            <input type="radio" id="auto-mode" name="camera-angle-mode" value="automatic" checked onclick="toggleCameraAngleSlider('auto')">
-                            <label for="auto-mode">Automatic</label>
-                            <input type="radio" id="manual-mode" name="camera-angle-mode" value="manual" onclick="toggleCameraAngleSlider('manual')">
-                            <label for="manual-mode">Manual</label>
-                        </div>
-                        
-                        <div id="camera-angle-slider-container" style="display: none; margin-top: 25px;">
-                            <label for="camera-angle-slider">
-                                <span class="label-text"><i class="fas fa-camera"></i> Camera Angle</span>
+                    </div> 
+
+                    <div class="control-switches">
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="pump-switch" onchange="toggleDevice('PUMP', this)">
+                                <span class="slider"></span>
                             </label>
-                            <input 
-                                type="range" 
-                                id="camera-angle-slider" 
-                                min="0" 
-                                max="180" 
-                                value="90" 
-                                step="1" 
-                                oninput="adjustCameraAngle(this.value)" 
-                            >
-                            <span id="camera-angle-display">90°</span> <!-- Display for current angle -->
+                            <span class="label-text"><i class="fas fa-pump-soap"></i> Pump</span>
+                        </div>
+
+                        <div class="camera-angle-control">      <!-- Camera Angle Control with Radio Buttons -->
+                            <label for="camera-angle-mode"><h3>Camera Angle Mode</h3></label>
+                            <div class="camera-angle-mode">
+                                <input type="radio" id="auto-mode" name="camera-angle-mode" value="automatic" checked onclick="toggleCameraAngleSlider('auto')">
+                                <label for="auto-mode">Automatic</label>
+                                <input type="radio" id="manual-mode" name="camera-angle-mode" value="manual" onclick="toggleCameraAngleSlider('manual')">
+                                <label for="manual-mode">Manual</label>
+                            </div>
+                            
+                            <div id="camera-angle-slider-container" style="display: none; margin-top: 25px;">
+                                <label for="camera-angle-slider">
+                                    <span class="label-text"><i class="fas fa-camera"></i> Camera Angle</span>
+                                </label>
+                                <input 
+                                    type="range" 
+                                    id="camera-angle-slider" 
+                                    min="0" 
+                                    max="180" 
+                                    value="90" 
+                                    step="1" 
+                                    oninput="adjustCameraAngle(this.value)" 
+                                >
+                                <span id="camera-angle-display">90°</span> <!-- Display for current angle -->
+                            </div>
                         </div>
                     </div>
+                    <h2><i class="fa-solid fa-tools"></i> Green House Controls</h2>
+
+                    <div class="control-switches">
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="heater-switch" onchange="toggleDevice('HEATER', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-temperature-high"></i> Heater</span>
+                        </div>
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="vent-switch" onchange="toggleDevice('FAN', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-wind"> </i> Exhaust Fan</span>
+                        </div>
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="vent-switch" onchange="toggleDevice('CURTAIN', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-wind"> </i> Shadow Curtain</span>
+                        </div>
+                    </div>
+
+                    <div class="vent-control">
+                        <h3 id="vent-angle-control-title">Vent Angle Control</h3>
+                        <div id="vent-angle-slider-container" style="display: block; margin-top: 25px;">
+                            <input 
+                                type="range" 
+                                id="vent-angle-slider" 
+                                min="0" 
+                                max="90" 
+                                value="0" 
+                                step="1" 
+                                oninput="adjustVentAngle(this.value)" 
+                            >
+                            <span id="vent-angle-display">0°</span> <!-- Display for current angle -->
+                        </div>
+                    </div>           
 
                 </div>
                 
@@ -152,7 +179,7 @@
             </div>
             
             <div class="section" id="plant-disease-recognition">
-                <h2><i class="fa-solid fa-virus"></i> Plant Disease Recognition</h2>
+                <h2 id="disease-recognition-title"><i class="fa-solid fa-virus"></i> Plant Disease Recognition</h2>
                 <div class="content">
                     <p>Upload an image of a plant leaf to recognize the disease.</p>
                     <input type="file" id="disease-image-upload" accept="image/*">
