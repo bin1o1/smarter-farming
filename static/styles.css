@@ -225,18 +225,20 @@ button:hover {
 }
 
 /* ////////////////////////////////Farm controls///////////////////////////// */
-.control-switches {
+.control-switches, .control-switches-fertilizer {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     justify-content: space-between;
     margin-bottom: 30px;
 }
 
 /* Each individual control switch item */
-.control-item {
+.control-switches .control-item {
+    flex: 0 1 calc(50% - 10px);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 /* The switch - the actual button */
@@ -446,7 +448,7 @@ input:checked + .slider:before {
     background-color: #fff7db; /* Slightly darker yellow on hover */
 }
 /* Camera angle slider container */
-.camera-angle-control {
+.camera-angle-control, .vent-control {
     margin-top: 20px; /* Adds space between the controls and the slider */
     text-align: left; /* Aligns the slider and its label to the left */
     padding: 25px; /* Increased padding for a more spacious feel */
@@ -455,10 +457,11 @@ input:checked + .slider:before {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.3s ease-in-out; /* Hover effect */
     width: 100%;
+    margin-bottom: 20px;
 }
 
 /* Hover effect for the container */
-.camera-angle-control:hover {
+.camera-angle-control:hover, .vent-control:hover {
     transform: translateY(-5px); /* Slightly lifts the container */
 }
 
@@ -472,7 +475,7 @@ input:checked + .slider:before {
 }
 
 /* Slider Styling */
-.camera-angle-control input[type="range"] {
+.camera-angle-control input[type="range"], .vent-control input[type="range"] {
     width: 100%; /* Occupies full width within the container */
     margin: 10px 0; /* Adds vertical spacing */
     -webkit-appearance: none;
@@ -487,7 +490,7 @@ input:checked + .slider:before {
 }
 
 /* Slider Thumb (the draggable circle) */
-.camera-angle-control input[type="range"]::-webkit-slider-thumb {
+.camera-angle-control input[type="range"]::-webkit-slider-thumb, .vent-control input[type="range"]::-webkit-slider-thumb  {
     -webkit-appearance: none; /* Removes default browser styling */
     appearance: none; /* Removes default styling for other browsers */
     background: #28a745; /* Green color for the thumb */
@@ -500,13 +503,13 @@ input:checked + .slider:before {
 }
 
 /* Thumb Hover Effect */
-.camera-angle-control input[type="range"]::-webkit-slider-thumb:hover {
+.camera-angle-control input[type="range"]::-webkit-slider-thumb:hover, .vent-control input[type="range"]::-webkit-slider-thumb:hover {
     background: #218838; /* Darker green on hover */
     transform: scale(1.2); /* Slightly enlarges the thumb */
 }
 
 /* Thumb Active (Clicked) Effect */
-.camera-angle-control input[type="range"]::-webkit-slider-thumb:active {
+.camera-angle-control input[type="range"]::-webkit-slider-thumb:active, .vent-control input[type="range"]::-webkit-slider-thumb:active  {
     background: #1e7e34; /* Even darker green when active */
     transform: scale(1.3); /* Enlarges the thumb a bit more */
 }

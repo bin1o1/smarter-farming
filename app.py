@@ -116,7 +116,7 @@ def predict_price(commodity_val: str):
         model = ARIMA(prices, order=(1, 1, 1))  
         model_fit = model.fit()
 
-        forecast_steps = 3
+        forecast_steps = 1
         forecast = model_fit.forecast(steps=forecast_steps)
 
         last_date = prices.index[-1]

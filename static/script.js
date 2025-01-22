@@ -17,7 +17,7 @@ async function searchCommodityPrice() {         //function to predict price. asy
     }
 
     pricePredictionSection.style.display = 'block';         //if not empty, the price prediction section is made visible
-    pricePredictionTitle.textContent = `Predicted prices of ${commodity} for the next 3 days:`     
+    pricePredictionTitle.textContent = `Best suggested price of ${commodity} for today:`     
 
     priceList.innerHTML = '';       //resets the contents of the pricelist element
 
@@ -118,8 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {     //code inside th
 let ws = new WebSocket("wss://smarterfarming.azurewebsites.net/ws");       //establishes a websocket connection to the server
 
 ws.onmessage = function(event) {
-    console.log("ESP32 says: " + event.data);       //logging recieved messages from the websocket server
-    //these logs can be viewed in website's developer tools 
+    console.log("Data: " + event.data);       //logging recieved messages from the websocket server
 };
 
 // to store the timers and intervals for the devices

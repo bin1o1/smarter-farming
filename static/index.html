@@ -39,7 +39,7 @@
                 <div class="section" id="greenhouse-controls">
                     <h2><i class="fa-solid fa-tools"></i> Farm Controls</h2>
 
-                    <div class="control-switches">
+                    <div class="control-switches-fertilizer">
                         <div class="control-item">
                             <button id="fertilizer-n-button">
                                 <i class="fas fa-leaf"></i> Nitrogen (N)
@@ -65,33 +65,41 @@
                             </label>
                             <span class="label-text"><i class="fas fa-pump-soap"></i> Pump</span>
                         </div>
-
-                        <div class="camera-angle-control">      <!-- Camera Angle Control with Radio Buttons -->
-                            <label for="camera-angle-mode"><h3>Camera Angle Mode</h3></label>
-                            <div class="camera-angle-mode">
-                                <input type="radio" id="auto-mode" name="camera-angle-mode" value="automatic" checked onclick="toggleCameraAngleSlider('auto')">
-                                <label for="auto-mode">Automatic</label>
-                                <input type="radio" id="manual-mode" name="camera-angle-mode" value="manual" onclick="toggleCameraAngleSlider('manual')">
-                                <label for="manual-mode">Manual</label>
-                            </div>
-                            
-                            <div id="camera-angle-slider-container" style="display: none; margin-top: 25px;">
-                                <label for="camera-angle-slider">
-                                    <span class="label-text"><i class="fas fa-camera"></i> Camera Angle</span>
-                                </label>
-                                <input 
-                                    type="range" 
-                                    id="camera-angle-slider" 
-                                    min="0" 
-                                    max="180" 
-                                    value="90" 
-                                    step="1" 
-                                    oninput="adjustCameraAngle(this.value)" 
-                                >
-                                <span id="camera-angle-display">90°</span> <!-- Display for current angle -->
-                            </div>
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="fertilizer-switch" onchange="toggleDevice('FERTILIZER', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-pump-soap"></i> Fertilizer</span>
                         </div>
                     </div>
+
+                    <div class="camera-angle-control">      <!-- Camera Angle Control with Radio Buttons -->
+                        <label for="camera-angle-mode"><h3>Camera Angle Mode</h3></label>
+                        <div class="camera-angle-mode">
+                            <input type="radio" id="auto-mode" name="camera-angle-mode" value="automatic" checked onclick="toggleCameraAngleSlider('auto')">
+                            <label for="auto-mode">Automatic</label>
+                            <input type="radio" id="manual-mode" name="camera-angle-mode" value="manual" onclick="toggleCameraAngleSlider('manual')">
+                            <label for="manual-mode">Manual</label>
+                        </div>
+                        
+                        <div id="camera-angle-slider-container" style="display: none; margin-top: 25px;">
+                            <label for="camera-angle-slider">
+                                <span class="label-text"><i class="fas fa-camera"></i> Camera Angle</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="camera-angle-slider" 
+                                min="0" 
+                                max="180" 
+                                value="90" 
+                                step="1" 
+                                oninput="adjustCameraAngle(this.value)" 
+                            >
+                            <span id="camera-angle-display">90°</span> <!-- Display for current angle -->
+                        </div>
+                    </div>
+
                     <h2><i class="fa-solid fa-tools"></i> Green House Controls</h2>
 
                     <div class="control-switches">
@@ -108,6 +116,15 @@
                                 <span class="slider"></span>
                             </label>
                             <span class="label-text"><i class="fas fa-wind"> </i> Exhaust Fan</span>
+                        </div>
+                    </div>
+                    <div class="control-switches">
+                        <div class="control-item">
+                            <label class="switch">
+                                <input type="checkbox" id="humidifier-switch" onchange="toggleDevice('HUMIDIFIER', this)">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="label-text"><i class="fas fa-wind"> </i> Humidifier</span>
                         </div>
                         <div class="control-item">
                             <label class="switch">
