@@ -216,11 +216,6 @@ button:hover {
     input[type="text"] {
         font-size: 1em;
     }
-
-    /* Optional: Prevent horizontal scrolling */
-    body {
-        overflow-x: hidden;
-    }
 }
 
 .weather-widget h2 {
