@@ -165,13 +165,18 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;  /* Reduce padding on smaller screens */
+    }
+
     .dashboard {
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
     }
 
     .section {
-        width: 100%;
+        width: 100%; /* Make sections full-width on smaller screens */
     }
 
     h1 {
@@ -180,25 +185,20 @@ button:hover {
 
     button {
         width: 100%;
-        padding: 14px;
-    }
-
-    input[type="text"] {
-        width: 100%;
-    }
-
-    .search-container {
-        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        padding: 10px;
+        padding: 5px; /* Reduce body padding on very small screens */
     }
 
     .dashboard {
-        padding: 10px;
+        padding: 0;
+    }
+
+    .section {
+        width: 100%; /* Ensure full width for sections */
     }
 
     h1 {
@@ -215,6 +215,10 @@ button:hover {
 
     input[type="text"] {
         font-size: 1em;
+    }
+
+    body {
+        overflow-x: hidden;
     }
 }
 
