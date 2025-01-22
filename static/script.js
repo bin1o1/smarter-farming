@@ -1,5 +1,7 @@
-function updateEnvironment() {          //update environment function 
-    document.getElementById('temperature').textContent = `28°C`;
+async function updateEnvironment() {          //update environment function 
+    const response = await fetch("https://thingspeak.mathworks.com/channels/2732805/feeds/last.json");
+    console.log('Response status:', response.status);
+    document.getElementById('temperature').textContent = data["field1"];
     document.getElementById('humidity').textContent = `65%`;
     document.getElementById('moisture').textContent = `10%`;
 }
