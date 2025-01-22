@@ -67,11 +67,22 @@ def add_crop_to_csv(crop_name, planting_date, harvest_duration):
 
     crop_data.to_csv('crops_data.csv', index=False)
 
+def delete_crop_from_csv(crop_name):
+    crop_data = load_crop_data()
+    # Remove the crop with the specified name
+    updated_data = crop_data[crop_data["Crop Name"] != crop_name]
+
+    if len(updated_data) == len(crop_data):
+        raise ValueError(f"Crop with name '{crop_name}' not found.")
+
+    updated_data.to_csv('crops_data.csv', index=False)
+
 def update_days_remaining():
     crop_data = load_crop_data()
     crop_data['Harvest Date'] = crop_data['Harvest Date'].apply(lambda x: x.split()[0])
     crop_data['Days Remaining'] = crop_data['Harvest Date'].apply(lambda x: (datetime.strptime(x, "%Y-%m-%d") - datetime.now()).days)
     crop_data.to_csv('crops_data.csv', index=False)
+
 
 @app.post("/add_crop/")
 async def add_crop(crop: Crop):
@@ -86,6 +97,17 @@ async def get_crops():
     update_days_remaining()
     crop_data = load_crop_data()
     return {"crops": crop_data.to_dict(orient="records")}
+
+@app.delete("/delete_crop/")
+async def delete_crop(crop_name: str):
+    try:
+        delete_crop_from_csv(crop_name)
+        return {"message": f"Crop '{crop_name}' deleted successfully!"}
+    except ValueError as ve:
+        return {"error": str(ve)}
+    except Exception as e:
+        return {"error": "An unexpected error occurred: " + str(e)}
+
 
 # ///////////////////////////////For price prediction system////////////////////////////////////////////////////////////////////
 

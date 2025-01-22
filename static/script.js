@@ -61,62 +61,86 @@ document.getElementById('update-environment-btn').addEventListener('click', upda
 document.getElementById('search-btn').addEventListener('click', searchCommodityPrice);          
 
 
-document.addEventListener("DOMContentLoaded", function () {     //code inside this eventlistener only runs after the whole HTML document has been loaded.
-    
-    async function loadCrops() {        //async function to load crops
-        const response = await fetch('https://smarterfarming.azurewebsites.net/get_crops/');       //fetches the crops planted from the server
+document.addEventListener("DOMContentLoaded", function () {
+
+    async function loadCrops() {
+        const response = await fetch('https://smarterfarming.azurewebsites.net/get_crops/');
         const data = await response.json();
         const cropsList = document.getElementById("crops-list");
         cropsList.innerHTML = ""; // Clear the list before adding new crops
+
         data.crops.forEach(crop => {
             const li = document.createElement("li");
             li.textContent = `${crop["Crop Name"]} (Planted on: ${crop["Planting Date"]}) - Harvest in: ${crop["Days Remaining"]} days`;
-            cropsList.appendChild(li); // Append each crop to the list
+            // Create a delete button for each crop
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.style.marginLeft = "10px"; 
+            deleteButton.style.backgroundColor = '#C41E3A'
+            deleteButton.addEventListener("click", async function () {
+                if (confirm(`Are you sure you want to delete ${crop["Crop Name"]}?`)) {
+                    await deleteCrop(crop["Crop Name"]); // Call deleteCrop function
+                    loadCrops(); // Reload the crop list
+                }
+            });
+
+            li.appendChild(deleteButton); // Add the delete button to the list item
+            cropsList.appendChild(li); // Append the list item to the crops list
         });
     }
 
+    async function deleteCrop(cropName) {
+        try {
+            const response = await fetch(`https://smarterfarming.azurewebsites.net/delete_crop/?crop_name=${cropName}`, {
+                method: 'DELETE'
+            });
+
+            const result = await response.json();
+            if (result.message) {
+                alert(result.message);
+            } else {
+                alert("Error: " + result.error);
+            }
+        } catch (error) {
+            console.error("Failed to delete crop:", error);
+            alert("An error occurred while deleting the crop.");
+        }
+    }
+
     document.getElementById("add-crop-form").addEventListener("submit", async function (event) {
-    //function to add a new crop after submission. 
-    //the event listener triggers async function (need to data from server for this function)
-    //the whole function has been given as parameter to addEventListener() here.
-        
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
+        const cropName = document.getElementById("crop-name").value;
+        const plantingDate = document.getElementById("planting-date").value;
+        const harvestDuration = document.getElementById("harvest-duration").value;
 
-        const cropName = document.getElementById("crop-name").value;        //cropname entered
-        const plantingDate = document.getElementById("planting-date").value;        //planting date entered
-        const harvestDuration = document.getElementById("harvest-duration").value;      //harvestduration entered
-
-        // Send POST request to the server to add the new crop
         const response = await fetch('https://smarterfarming.azurewebsites.net/add_crop/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'      //tells the server that the body is in JSON
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({      //converts the data into a JSON string
+            body: JSON.stringify({
                 name: cropName,
                 planting_date: plantingDate,
                 harvest_duration: parseInt(harvestDuration)
             })
         });
 
-        const result = await response.json();       //parsed JSON response from the server 
-
-        if (result.message) {       
+        const result = await response.json();
+        if (result.message) {
             alert(result.message);
-            loadCrops(); // Reload the crops list after adding a new crop
+            loadCrops();
         } else {
             alert("Error: " + result.error);
         }
 
-        // Clear form fields
-        document.getElementById("crop-name").value = '';        //fields for input are reset.
+        document.getElementById("crop-name").value = '';
         document.getElementById("planting-date").value = '';
         document.getElementById("harvest-duration").value = '';
     });
 
-    loadCrops();        // Load crops when the page is loaded
-
+    loadCrops(); // Load crops when the page is loaded
 });
+
 
 
 let ws = new WebSocket("wss://smarterfarming.azurewebsites.net/ws");       //establishes a websocket connection to the server

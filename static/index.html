@@ -39,16 +39,26 @@
                 <div class="charts-container"> <!-- Section container for current environment -->
                     <h2 id="chartstext">Charts</h2>
                     <div class="charts">
-                        <iframe width="450" height="260" style="border: 5px solid #000;" 
-                            src="https://thingspeak.com/channels/2816766/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
-                        </iframe>
-                        <iframe width="450" height="260" style="border: 5px solid #000;" 
-                            src="https://thingspeak.com/channels/2816766/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
-                        </iframe>
-                        <iframe width="450" height="260" style="border: 5px solid #000;" 
-                            src="https://thingspeak.com/channels/2816766/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
-                        </iframe>
+                        <div class="chart-item">
+                            <p style="text-align: center; font-weight: bold;">Temperature Chart</p>
+                            <iframe width="450" height="260" style="border: 5px solid #000;" 
+                                src="https://thingspeak.com/channels/2816766/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
+                            </iframe>
+                        </div>
+                        <div class="chart-item">
+                            <p style="text-align: center; font-weight: bold;">Humidity Chart</p>
+                            <iframe width="450" height="260" style="border: 5px solid #000;" 
+                                src="https://thingspeak.com/channels/2816766/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
+                            </iframe>
+                        </div>
+                        <div class="chart-item">
+                            <p style="text-align: center; font-weight: bold;">Soil Moisture Chart</p>
+                            <iframe width="450" height="260" style="border: 5px solid #000;" 
+                                src="https://thingspeak.com/channels/2816766/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15">
+                            </iframe>
+                        </div>
                     </div>
+                    
                 </div>
                 
                 <div class="section" id="greenhouse-controls">
