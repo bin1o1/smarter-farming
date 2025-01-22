@@ -1,9 +1,11 @@
 async function updateEnvironment() {          //update environment function 
-    const response = await fetch("https://thingspeak.mathworks.com/channels/2732805/feeds/last.json");
+    const response = await fetch("https://api.thingspeak.com/channels/2816766/feeds.json?results=2");
+    data = await response.json()
+    console.log(data)
     console.log('Response status:', response.status);
-    document.getElementById('temperature').textContent = data["field1"];
-    document.getElementById('humidity').textContent = `65%`;
-    document.getElementById('moisture').textContent = `10%`;
+    document.getElementById('temperature').textContent = data["feeds"][0]["field1"] + "°C";
+    document.getElementById('humidity').textContent = data["feeds"][0]["field2"] + "%";
+    document.getElementById('moisture').textContent = data["feeds"][0]["field3"] + "%";
 }
 
 async function searchCommodityPrice() {         //function to predict price. asynchronous to prevent lagging in the website. Rest of the code still runs while this executes.

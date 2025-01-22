@@ -70,6 +70,10 @@ header h1 i:hover {
 
 /* /////////////Current env and greenhouse-controls////////////// */
 
+#greenhouse-controls{
+    width: 100%;
+}
+
 .section {
     background-color: #ffffff;
     padding: 20px;
@@ -583,4 +587,30 @@ input:focus {
 #vent-angle-display {
     margin-top: 5px;
     font-weight: bold;
+}
+
+.charts-container{
+    background-color: white;
+}
+
+.charts{
+    display: flex;
+    flex-wrap: wrap; /* Enables wrapping of child elements */
+    justify-content: center; /* Centers wrapped rows horizontally */
+    gap: 20px; /* Adds spacing between items */
+    /* width: 100%; */
+    /* background-color: white; */
+}
+
+iframe {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex: 1 1 450px; /* Allows iframes to adjust their size flexibly */
+    max-width: 450px; /* Ensures iframes don't exceed their intended width */
+}
+
+#chartstext {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center; /* Centers the heading text */
 }
