@@ -340,7 +340,8 @@ async function predictDisease() {
 
         if (data.class && data.confidence) {
             document.getElementById("disease-name").textContent = `Disease: ${data.class}`;
-            document.getElementById("disease-confidence").textContent = `Confidence: ${(data.confidence * 100).toFixed(2)}%`;
+            // document.getElementById("disease-confidence").textContent = `Confidence: ${(data.confidence * 100).toFixed(2)}%`;
+            console.log(data.class, `, Confidence: ${(data.confidence * 100).toFixed(2)}%`)
             document.getElementById("disease-measures").textContent = `Suggestions: ${data.measures}`;
             // Show the result
             resultContainer.style.display = "block";
