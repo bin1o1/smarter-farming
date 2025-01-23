@@ -1,4 +1,4 @@
-async function updateEnvironment() {          //update environment function 
+async function updateEnvironment() {          //update environment function from thingspeak data
     const response = await fetch("https://api.thingspeak.com/channels/2816766/feeds.json?results=2");
     data = await response.json()
     console.log(data)
@@ -89,10 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    async function deleteCrop(cropName) {
+    async function deleteCrop(cropName) {       //delete an existing crop
         try {
             const response = await fetch(`https://smarterfarming.azurewebsites.net/delete_crop/?crop_name=${cropName}`, {
-                method: 'DELETE'
+                method: 'DELETE'        //run the delete method using api
             });
 
             const result = await response.json();
@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    document.getElementById("add-crop-form").addEventListener("submit", async function (event) {
-        event.preventDefault();
+    document.getElementById("add-crop-form").addEventListener("submit", async function (event) {        //add new crop
+        event.preventDefault();     //prevent default values submission
         const cropName = document.getElementById("crop-name").value;
         const plantingDate = document.getElementById("planting-date").value;
         const harvestDuration = document.getElementById("harvest-duration").value;
