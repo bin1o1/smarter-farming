@@ -362,6 +362,6 @@ function adjustVentAngle(angle) {
     console.log(`Vent angle adjusted to: ${angle}°`);
 
     if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(`VENT_ANGLE:${angle}`);
+        ws.send(`VENT_ANGLE:${angle*2}`);
     }
 }
